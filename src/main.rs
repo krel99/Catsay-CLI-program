@@ -1,7 +1,9 @@
 //cargo run "meow" 1> stdout.txt 2> stderr.txt
 //cargo run "woof" 1> stdout.txt 2> stderr.txt
+//cargo run
 
 use clap::Parser;
+use colored::Colorize;
 
 #[derive(Parser)]
 struct Options {
@@ -17,11 +19,11 @@ fn main() {
     let options = Options::parse();
     let message = options.message;
     let eye = if options.dead { "x" } else { "o" };
-    println!("{}", message);
+    println!("{}", message.bright_yellow().underline().on_purple());
     println!(" \\");
     println!("  \\");
     println!("     /\\_/\\");
-    println!("     ( {eye} {eye} )");
+    println!("     ( {eye} {eye} )", eye = eye.red().bold());
     println!("      =( I )=");
 
     if message.to_lowercase() == "woof" {
